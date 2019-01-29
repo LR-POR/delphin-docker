@@ -8,25 +8,26 @@
 
  1) Basics
 
-   Docker is a super-light virtualization engine that allows the creation
-   and execution of small VMs that contain the barely minimum needed to 
-   run the desired programs. 
-   These small virtual machines are called "images".
-   Docker images are run in "containers", which are running instances of a VM.
+   Docker is a super-light virtualization engine that allows the
+   creation and execution of small VMs that contain the barely minimum
+   needed to run the desired programs.  These small virtual machines
+   are called "images".  Docker images are run in "containers", which
+   are running instances of a VM.
 
-   a) Install docker
-   Go to www.docker.com and click on "Get Docker for MAC" button
-   You will get a .dmg that can me installed following usual procedure.
+   a) Install docker Go to www.docker.com and click on "Get Docker for
+   MAC" button You will get a .dmg that can me installed following
+   usual procedure.
 
-   b) The VM will redirect the output windows to the X-windows server in the 
-   host OSX. Thus, you need to install an X11 server in you mac.
-   Go to  https://www.xquartz.org/, download the .dmg and install normally.
+   b) The VM will redirect the output windows to the X-windows server
+   in the host OSX. Thus, you need to install an X11 server in you
+   mac.  Go to https://www.xquartz.org/, download the .dmg and install
+   normally.
 
 
  2) Launch docker engine 
 
-    For docker VMs to be able to run, the docker engine must be running.
-    Go to "Applications" and launch it.
+    For docker VMs to be able to run, the docker engine must be
+    running.  Go to "Applications" and launch it.
 
 
  3) Create or get an image
@@ -56,9 +57,10 @@
 
 
  4) Install logon normally in your $HOME
-    Follow the instructions in http://moin.delph-in.net/LogonInstallation
-    to get a copy of logon tree, and an appropriate .bashrc and .emacs in 
-    your $HOME folder.
+
+    Follow the instructions in
+    http://moin.delph-in.net/LogonInstallation to get a copy of logon
+    tree, and an appropriate .bashrc and .emacs in your $HOME folder.
     You need to do this only once.
 
 
@@ -70,10 +72,10 @@
 
  1) Make sure docker engine is running
 
-    It will be probably launched by default at startup, so you don't need to do anything.
-    If it is not (no little whale blowing in the top panel), go to "Applications" and launch it.
+    It will be probably launched by default at startup, so you don't
+    need to do anything.  If it is not (no little whale blowing in the
+    top panel), go to "Applications" and launch it.
 
-  
  2) Launch VM and run logon
 
     To launch the VM, simply execute the script:
@@ -86,10 +88,11 @@
 
     And from there, proceeed normally (M-x logon, etc.)
    
-    The script 'logon.sh' takes care of several tuning steps needed to run the VM,
-    related to redirecting logon windows to OSX X11 manager and making your $HOME 
-    folder (which contains the logon tree) visible from inside the VM.
-    Check the comments inside to find out details about what is it doing.
+    The script 'logon.sh' takes care of several tuning steps needed to
+    run the VM, related to redirecting logon windows to OSX X11
+    manager and making your $HOME folder (which contains the logon
+    tree) visible from inside the VM.  Check the comments inside to
+    find out details about what is it doing.
  
    
 
