@@ -1,8 +1,8 @@
 #! /bin/bash
 
-## Usage:   ./logon.sh 
+## Usage:   ./logon.sh (optionally execute `sudo service nginx start`)
 ###
-###   your $HOME folder must contain:
+###   your $HOME/hpsg folder must contain:
 ###       - Subdirectory 'logon', containing all logon tree
 ###       - fixed .bashrc with LOGONROOT definition
 ###       - fixed .emacs with logon stuff
