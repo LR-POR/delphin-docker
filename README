@@ -39,16 +39,7 @@
     Next step is loading the image of your VM into your docker engine.
     You need to do this only once.
 
-    There are two ways of doing that: 
-
-    a) Using a pre-built image. 
-       If you have the .tar for the image, you only need to do
-  
-           docker load < image.tar
-
-       This will load a pre-built image named 'logon' from the given tarfile.
-
-    b) Building the image yourself.
+    - Building the image yourself.
        To build the image, you need a "Dockerfile" as the one located
        in image/Dockerfile in this folder.
 
