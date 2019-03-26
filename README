@@ -88,6 +88,25 @@
     manager and making your $HOME folder (which contains the logon
     tree) visible from inside the VM.  Check the comments inside to
     find out details about what is it doing.
- 
-   
+
+3) If you want to use fftb, once in the VM, start the nginx server with:
+
+        sudo service nginx start
+
+   Once nginx is running, the requests from the host machine to
+   http://127.0.0.1:9080 are redirected to the internal 8080 container
+   port (see the logon.sh -v paramenter in the docker run) and nginx
+   redirect it to the container http://localhost:9080 where fftb is
+   listening. This whole process is necessary because the limitations
+   of Docker running in Mac OS system (see
+   https://docs.docker.com/docker-for-mac/networking/) and the way
+   fftb is implemented to listen only the "127.0.0.1" address which
+   corresponds to the VM local address not the container local adress
+   where fftb runs.
+
+   The script also export the port 9080 to the host 8080. So one can
+   start the www server (http://moin.delph-in.net/LogonOnline) and
+   access it from your browser in the host
+   http://localhost:8080/logon. For this, you don't need the nginx
+   server running.
 

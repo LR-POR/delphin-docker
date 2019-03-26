@@ -18,7 +18,7 @@ xhost +
 IP=`ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print $2}'`
 
 # run VM, redirecting display and mapping $HOME folders 
-docker run -p 9080:8080 -it --rm -v $HOME/hpsg:/home/user -w /home/user --user=user -e DISPLAY=$IP:0 logon /bin/bash
+docker run -p 9080:8080 -p 8080:8090 -it --rm -v $HOME/hpsg:/home/user -w /home/user --user=user -e DISPLAY=$IP:0 logon /bin/bash
 
 # remove X11 socket binding
 killall socat
