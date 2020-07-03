@@ -2,9 +2,45 @@
  HOW TO RUN LOGON ON MACOSX WITH DOCKER
  ======================================
 
+ More on http://moin.delph-in.net/LkbMacintosh
 
- Instructions taken from http://moin.delph-in.net/LkbMacintosh and
- modified by Alexandre Rademaker.
+ Docker is a super-light virtualization engine that allows the
+ creation and execution of small VMs that contain the barely minimum
+ needed to run the desired programs.  These small virtual machines are
+ called "images".  Docker images run in "containers", which are
+ running instances of a VM.
+
+ The initial idea of this project is to provide a lightweight Linux
+ environment for running the LOGON distribution tools. The LOGON
+ directory need not be inside the image. Actually, following the steps
+ below, we mount a local diretory in the MacOS host system as the
+ $HOME diretory of the default user inside the image.
+
+ Later, we consider adding support for the ACE-dependent tools. We
+ could have used the binary distributions from
+ http://sweaglesw.org/linguistics/acetools/ but the `fftb/web.c` needs
+ a tiny modification to proper accept requests from the port exposed
+ to the host system. Curently, we have modified copy of this file in
+ this repository. We currently support:
+
+ - ace
+ - fftb
+ - art
+ - mkprof
+ - arbiter
+
+ (the image/Dockerfile ended up providing a detailed step-by-step to
+ the compilation of all ACE-dependent tools we support.)
+
+ The logon.sh script also export the port 8080 to the host 8080. So
+ one can start the www server (http://moin.delph-in.net/LogonOnline)
+ and access it from your browser in the host
+ http://localhost:8080/logon.
+
+ Another benefits of a docker is that a user can also commit the stage
+ of a container running saving it in another image:
+
+ https://docs.docker.com/engine/reference/commandline/commit/
 
  ------------
  INSTALLATION
@@ -12,14 +48,8 @@
 
  1) Basics
 
-   Docker is a super-light virtualization engine that allows the
-   creation and execution of small VMs that contain the barely minimum
-   needed to run the desired programs.  These small virtual machines
-   are called "images".  Docker images are run in "containers", which
-   are running instances of a VM.
-
-   a) Install docker Go to www.docker.com and click on "Get Docker for
-   MAC" button You will get a .dmg that can me installed following
+   a) Install docker from www.docker.com and click on "Get Docker for
+   Mac" button You will get a .dmg that can me installed following
    usual procedure.
 
    b) The VM will redirect the output windows to the X-windows server
@@ -34,36 +64,36 @@
     running.  Go to "Applications" and launch it.
 
 
- 3) Create or get an image
+ 3) Build the image
 
     Next step is loading the image of your VM into your docker engine.
     You need to do this only once.
 
-    - Building the image yourself.
-       To build the image, you need a "Dockerfile" as the one located
-       in image/Dockerfile in this folder.
+    To build the image, you need a "Dockerfile" as the one located in
+    image/Dockerfile in this folder. Then, just execute:
 
-       Then, just execute:
-           docker build -t logon image
+      docker build -t logon image
 
-       This will create an image named 'logon' using the Dockerfile
-       in folder 'image'. This image is a minimum ubuntu installation with
-       emacs and other libraries needed to run logon. 
+    This will create an image named 'logon' using the Dockerfile in
+    folder 'image'. 
 
-
- 4) Install logon normally in your $HOME
+ 4) Install logon normally in the $HOME/hpsg folder:
 
     Follow the instructions in
     http://moin.delph-in.net/LogonInstallation to get a copy of logon
     tree, and an appropriate .bashrc and .emacs in your $HOME folder.
     You need to do this only once.
 
+    The $HOME/hpsg folder on your host system will be mounted in the
+    image as the $HOME folder of the default user called 'user'.
+
 
  ---------
  EXECUTION
  ---------
 
- Once your image is created, you can run logon anytime  with two simple steps:
+ Once your image is created, you can run logon anytime with two simple
+ steps:
 
  1) Make sure docker engine is running
 
@@ -75,11 +105,11 @@
 
     To launch the VM, simply execute the script:
 
-         ./logon.sh
+      ./logon.sh
 
     You will get the prompt for the VM shell, where you can type
  
-         emacs 
+      emacs 
 
     And from there, proceeed normally (M-x logon, etc.)
    
@@ -89,24 +119,9 @@
     tree) visible from inside the VM.  Check the comments inside to
     find out details about what is it doing.
 
-3) If you want to use fftb, once in the VM, start the nginx server with:
+    ACE tools are installed in the /usr/local/bin. 
 
-        sudo service nginx start
-
-   Once nginx is running, the requests from the host machine to
-   http://127.0.0.1:9080 are redirected to the internal 8080 container
-   port (see the logon.sh -v paramenter in the docker run) and nginx
-   redirect it to the container http://localhost:9080 where fftb is
-   listening. This whole process is necessary because the limitations
-   of Docker running in Mac OS system (see
-   https://docs.docker.com/docker-for-mac/networking/) and the way
-   fftb is implemented to listen only the "127.0.0.1" address which
-   corresponds to the VM local address not the container local adress
-   where fftb runs.
-
-   The script also export the port 9080 to the host 8080. So one can
-   start the www server (http://moin.delph-in.net/LogonOnline) and
-   access it from your browser in the host
-   http://localhost:8080/logon. For this, you don't need the nginx
-   server running.
+   IMPORTANTE: You will also need to set up the LOGNAME environment
+   variable to a string containg the username you want to register in
+   the profile as the annotator.
 

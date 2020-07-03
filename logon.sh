@@ -15,10 +15,10 @@ socat TCP-LISTEN:6000,reuseaddr,fork UNIX-CLIENT:\"$DISPLAY\" &
 xhost +
 
 # find out IP of host
-IP=`ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print $2}'`
+IP=`ipconfig getifaddr en0`
 
-# run VM, redirecting display and mapping $HOME folders 
-docker run -p 9080:8080 -p 8080:8090 -it --rm -v $HOME/hpsg:/home/user -w /home/user --user=user -e DISPLAY=$IP:0 logon /bin/bash
+# run VM, redirecting display, ports and map the $HOME folder.
+docker run -p 9080:9080 -p 8080:8080 -it --rm -v $HOME/hpsg:/home/user -w /home/user --user=user -e DISPLAY=$IP:0 logon:latest /bin/bash
 
 # remove X11 socket binding
 killall socat
