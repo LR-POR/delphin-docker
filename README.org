@@ -58,28 +58,23 @@
 
  https://docs.docker.com/engine/reference/commandline/commit/
 
-
 * Instalation
 
- 1) Basics
+1) Basics
 
-   a) Install docker from www.docker.com and click on "Get Docker for
-   Mac" button You will get a .dmg that can me installed following
-   usual procedure.
+   a) Install docker from www.docker.com.
 
    b) The VM will redirect the output windows to the X-windows server
    in the host OSX. Thus, you need to install an X11 server in you
    mac.  Go to https://www.xquartz.org/, download the .dmg and install
    normally.
 
-
- 2) Launch docker engine 
+2) Launch docker engine 
 
     For docker VMs to be able to run, the docker engine must be
     running.  Go to "Applications" and launch it.
 
-
- 3) Build the image
+3) Build the image
 
     Next step is loading the image of your VM into your docker engine.
     You need to do this only once.
@@ -92,16 +87,15 @@
     This will create an image named 'logon' using the Dockerfile in
     folder 'image'. 
 
- 4) Install logon normally in the $HOME/hpsg folder:
+ 4) Install logon in the $HOME/hpsg folder of your HOST system.
 
     Follow the instructions in
     http://moin.delph-in.net/LogonInstallation to get a copy of logon
-    tree, and an appropriate .bashrc and .emacs in your $HOME folder.
-    You need to do this only once.
+    tree, and an appropriate .bashrc and .emacs in your $HOME/hpsg
+    folder. You need to do this only once.
 
     The $HOME/hpsg folder on your host system will be mounted in the
     image as the $HOME folder of the default user called 'user'.
-
 
 * Execution
 
@@ -137,3 +131,16 @@ steps:
    IMPORTANTE: You will also need to set up the LOGNAME environment
    variable to a string containg the username you want to register in
    the profile as the annotator.
+
+* License
+
+See the LICENSE file. Note that this repository contains a Dockerfile
+that downloads and installs other third part systems into a Linux
+system image. The licenses of those systems should also be
+considered. Please consult them at:
+
+- http://moin.delph-in.net/LogonTop
+- http://sweaglesw.org/linguistics/ace/
+- http://sweaglesw.org/linguistics/libtsdb/art.html
+- http://moin.delph-in.net/FftbTop
+- http://sweaglesw.org/linguistics/arbiter/
