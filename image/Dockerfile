@@ -6,7 +6,7 @@ RUN apt install -y apt-utils iproute2 nginx dbus-x11 libssl-dev \
 	libjpeg62 libx11-6:i386 libxext6:i386 libfontconfig1:i386 libxpm4 libxt6 \
 	libxmu6 libxft2 libjpeg62 libpng-dev pvm bison flex tmux libssl-dev libreadline-dev \
 	locales openssl python3-pip git wget curl sudo emacs bzip2 libboost-all-dev subversion \
-	libpq-dev
+	libpq-dev openssh-client gnulib
 
 RUN apt autoremove -y && apt clean -y 
 
@@ -61,10 +61,11 @@ RUN make art mkprof
 RUN cp art mkprof /usr/local/bin/
 
 WORKDIR /usr/local
-RUN svn co http://sweaglesw.org/svn/treebank/trunk fftb
+# need to close using https given git issues with ssh
+RUN git clone https://github.com/arademaker/treebank.git fftb
 WORKDIR /usr/local/fftb
+RUN git checkout issue-2
 RUN cp Makefile Makefile.origin && egrep -v ^DELPHIN_LIBS Makefile.origin > Makefile
-COPY web.c /usr/local/fftb/web.c
 RUN make
 WORKDIR /usr/local/bin
 RUN ln -s ../fftb/fftb .
