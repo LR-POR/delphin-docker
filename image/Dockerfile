@@ -62,9 +62,9 @@ RUN cp art mkprof /usr/local/bin/
 
 WORKDIR /usr/local
 # need to close using https given git issues with ssh
-RUN git clone https://github.com/arademaker/treebank.git fftb
+RUN git clone https://github.com/delph-in/fftb.git fftb
 WORKDIR /usr/local/fftb
-RUN git checkout issue-2
+RUN git checkout issue-1
 RUN cp Makefile Makefile.origin && egrep -v ^DELPHIN_LIBS Makefile.origin > Makefile
 RUN make
 WORKDIR /usr/local/bin
