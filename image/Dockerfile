@@ -1,5 +1,6 @@
-FROM ubuntu:19.10
+FROM ubuntu:20.04
 
+ARG DEBIAN_FRONTEND=noninteractive
 RUN dpkg --add-architecture i386
 RUN apt update -q
 RUN apt install -y apt-utils iproute2 nginx dbus-x11 libssl-dev \
