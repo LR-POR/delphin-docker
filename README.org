@@ -38,6 +38,7 @@
  - art
  - mkprof
  - arbiter
+ - LinGO Grammar Matrix
 
  All these tools can also be obtained compiled for Linux only in
  http://sweaglesw.org/linguistics/acetools/. But the `fftb/web.c`
@@ -132,6 +133,15 @@ steps:
    variable to a string containg the username you want to register in
    the profile as the annotator.
 
+
+* Starting the Matrix 
+
+  start the apache2 service with the command below, password of "user"
+  is "user".
+
+  : sudo service apache2 start
+
+  
 * License
 
 See the LICENSE file. Note that this repository contains a Dockerfile
