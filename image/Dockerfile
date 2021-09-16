@@ -3,11 +3,11 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 RUN dpkg --add-architecture i386
 RUN apt update -q
-RUN apt install -y apt-utils iproute2 nginx dbus-x11 libssl-dev \
+RUN apt install -y apt-utils iproute2 nginx dbus-x11 libssl-dev gdb  \
 	libjpeg62 libx11-6:i386 libxext6:i386 libfontconfig1:i386 libxpm4 libxt6 \
 	libxmu6 libxft2 libjpeg62 libpng-dev pvm bison flex tmux libssl-dev libreadline-dev \
 	locales openssl python3-pip git wget curl sudo emacs bzip2 libboost-all-dev subversion \
-	libpq-dev openssh-client gnulib
+	libpq-dev openssh-client gnulib apache2 rsync
 
 RUN apt autoremove -y && apt clean -y 
 
@@ -78,7 +78,15 @@ RUN make
 WORKDIR /usr/local/bin
 RUN ln -s ../arbiter/arbiter .
 
+WORKDIR /tmp
+COPY 000-default.conf /etc/apache2/sites-available/
+COPY install-matrix.sh /tmp/
+RUN chmod +x install-matrix.sh
+RUN ./install-matrix.sh
+
 USER user
 ENV HOME /home/user
+
+CMD apachectl -D FOREGROUND
 
 CMD /bin/bash

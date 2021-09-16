@@ -17,7 +17,7 @@ xhost +
 IP=`ipconfig getifaddr en0`
 
 # run VM, redirecting display, ports and map the $HOME folder.
-docker run -p 9080:9080 -p 8080:8080 -it --rm -v $HOME/hpsg:/home/user -w /home/user --user=user -e DISPLAY=$IP:0 logon:latest /bin/bash
+docker run -p 80:80 -p 9080:9080 -p 8080:8080 -it --rm -v $HOME/hpsg:/home/user -w /home/user --user=user -e DISPLAY=$IP:0 logon:latest /bin/bash
 
 # remove X11 socket binding
 killall socat
